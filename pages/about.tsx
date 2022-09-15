@@ -1,20 +1,19 @@
-import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import React from "react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "home"])),
+      ...(await serverSideTranslations(locale, ["about", "home"])),
     },
   };
 }
-const Home: NextPage = () => {
-  const { t } = useTranslation("common");
-  console.log(t);
-  debugger;
+const about = () => {
+  const { t } = useTranslation("about");
+  const { locale } = useRouter();
 
-  return <main>{t("greeting")}</main>;
+  return <main>{t("about")}</main>;
 };
 
-export default Home;
+export default about;
